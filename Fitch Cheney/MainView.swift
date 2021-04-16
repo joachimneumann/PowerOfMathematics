@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Number: View {
     @State var viewModel: ViewModel
+    let numberSuit: Model.Suit
     let w: CGFloat = 0.23
     var body: some View {
         GeometryReader { geometry in
@@ -23,7 +24,7 @@ struct Number: View {
                                 .font(viewModel.font)
                                 .padding(.bottom, viewModel.bottomPaddingNumbers)
                                 .zIndex(1)
-                            Image(viewModel.currentSuitName())
+                            Image(numberSuit.name)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width * w)
@@ -43,7 +44,7 @@ struct Number: View {
                                 .font(viewModel.font)
                                 .padding(.bottom, viewModel.bottomPaddingNumbers)
                                 .zIndex(1)
-                            Image(viewModel.currentSuitName())
+                            Image(numberSuit.name)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width * w)
@@ -63,7 +64,7 @@ struct Number: View {
                                 .font(viewModel.font)
                                 .padding(.bottom, viewModel.bottomPaddingNumbers)
                                 .zIndex(1)
-                            Image(viewModel.currentSuitName())
+                            Image(numberSuit.name)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width * w)
@@ -83,7 +84,7 @@ struct Number: View {
                                 .font(viewModel.font)
                                 .padding(.bottom, viewModel.bottomPaddingNumbers)
                                 .zIndex(1)
-                            Image(viewModel.currentSuitName())
+                            Image(numberSuit.name)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width * w)
@@ -105,7 +106,7 @@ struct Suit: View {
     @State var viewModel: ViewModel
     var body: some View {
         VStack {
-            Text("Card \(viewModel.currentCounter)")
+            Text("Card \(viewModel.numberOfCards + 1)")
                 .font(viewModel.font)
                 .padding(.bottom, 50)
             HStack {
@@ -178,7 +179,6 @@ struct Solution: View {
             }
     }
 }
-//            .rotation3DEffect(self.flipped ? Angle(degrees: 180): Angle(degrees: 0), axis: (x: CGFloat(0), y: CGFloat(10), z: CGFloat(0)))
 
 
 struct MainView: View {
@@ -187,10 +187,10 @@ struct MainView: View {
         if viewModel.solution != nil {
             Solution(viewModel: viewModel)
         } else {
-            if viewModel.currentSuit() == .none {
-                Suit(viewModel: viewModel)
+            if let s = viewModel.selectedSuit {
+                Number(viewModel: viewModel, numberSuit: s)
             } else {
-                Number(viewModel: viewModel)
+                Suit(viewModel: viewModel)
             }
         }
     }

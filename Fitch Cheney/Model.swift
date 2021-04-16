@@ -9,11 +9,9 @@ import Foundation
 
 struct Model {
     enum Suit {
-        case none, diamonds, hearts, spades, clubs
+        case diamonds, hearts, spades, clubs
         var name: String {
             switch self {
-            case .none:
-                return "none"
             case .diamonds:
                 return "diamonds"
             case .hearts:
@@ -24,10 +22,20 @@ struct Model {
                 return "clubs"
             }
         }
+        var color: String {
+            switch self {
+            case .diamonds:
+                return "red"
+            case .hearts:
+                return "red"
+            case .spades:
+                return "black"
+            case .clubs:
+                return "black"
+            }
+        }
         var value: Int {
             switch self {
-            case .none:
-                return -10000
             case .diamonds:
                 return 100
             case .hearts:
@@ -41,11 +49,9 @@ struct Model {
     }
 
     enum Number {
-        case none, N2, N3, N4, N5, N6, N7, N8, N9, N10, NJ, NQ, NK, NA
+        case N2, N3, N4, N5, N6, N7, N8, N9, N10, NJ, NQ, NK, NA
         var name: String {
             switch self {
-            case .none:
-                return "none"
             case .N2:
                 return "2"
             case .N3:
@@ -76,8 +82,6 @@ struct Model {
         }
         var shortName: String {
             switch self {
-            case .none:
-                return "none"
             case .N2:
                 return "2"
             case .N3:
@@ -108,8 +112,6 @@ struct Model {
         }
         var value: Int {
             switch self {
-            case .none:
-                return -10000
             case .N2:
                 return 2
             case .N3:
@@ -169,27 +171,13 @@ struct Model {
             case 14:
                 return .NA
             default:
-                return .none
+                return .NA
         }
     }
     
     struct Card {
         var suit: Suit
         var number: Number
-        var color: String {
-            switch suit {
-            case .none:
-                return "black"
-            case .diamonds:
-                return "red"
-            case .hearts:
-                return "red"
-            case .spades:
-                return "black"
-            case .clubs:
-                return "black"
-            }
-        }
         
         func gt(_ c: Card) -> Bool {
             if self.value > c.value {
@@ -250,15 +238,9 @@ struct Model {
     
     var solution: String? = nil
     var cards: [Card] = []
-    var current: Int?
         
-    var currentCard: Model.Card {
-        cards[current!]
-    }
-
     mutating func reset() {
-        cards = [Card(suit: .none, number: .none), Card(suit: .none, number: .none), Card(suit: .none, number: .none), Card(suit: .none, number: .none)]
-        current = 0
+        cards = []
         solution = nil
     }
 

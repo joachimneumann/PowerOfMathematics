@@ -9,37 +9,30 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published var model: Model
-    
-    func currentSuitName() -> String {
-        return model.currentCard.suit.name
-    }
+    @Published var selectedSuit: Model.Suit?
 
     func hasBeenSelected(_ c: Model.Number) -> Bool {
-        let card = Model.Card(suit: currentSuit(), number: c)
+        let card = Model.Card(suit: selectedSuit!, number: c)
         for selected in model.cards {
             if card == selected { return true }
         }
         return false
     }
     
-    func currentSuit() -> Model.Suit {
-        return model.currentCard.suit
-    }
-
-    var currentCounter: Int {
-        model.current! + 1
-    }
-
     var solution: String? {
         model.solution
     }
 
+    var numberOfCards: Int {
+        model.cards.count
+    }
+    
     func reset() {
         model.reset()
     }
     
     func color() -> Color {
-        switch model.currentCard.color {
+        switch selectedSuit!.color {
         case "black":
             return Color.black
         case "red":
@@ -50,13 +43,13 @@ class ViewModel: ObservableObject {
     }
     
     func setSuit(_ new: Model.Suit) {
-        model.cards[model.current!].suit = new
+        selectedSuit = new
     }
 
     func setNumber(_ new: Model.Number) {
-        model.cards[model.current!].number = new
-        model.current! += 1
-        if model.current! == 4 {
+        model.cards.append(Model.Card(suit: selectedSuit!, number: new))
+        selectedSuit = nil
+        if model.cards.count == 4 {
             model.calc()
         }
     }
