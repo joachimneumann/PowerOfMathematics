@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA86DEED262996F400D9BECC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86DEEC262996F400D9BECC /* SettingsView.swift */; };
 		AA97011126283F1500EA47BF /* Fitch_CheneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97011026283F1500EA47BF /* Fitch_CheneyApp.swift */; };
 		AA97011326283F1500EA47BF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97011226283F1500EA47BF /* MainView.swift */; };
 		AA97011526283F1700EA47BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA97011426283F1700EA47BF /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA86DEEC262996F400D9BECC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA97010D26283F1500EA47BF /* Fitch Cheney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fitch Cheney.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA97011026283F1500EA47BF /* Fitch_CheneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fitch_CheneyApp.swift; sourceTree = "<group>"; };
 		AA97011226283F1500EA47BF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				AA970157262882A600EA47BF /* ViewModel.swift */,
 				AA97011026283F1500EA47BF /* Fitch_CheneyApp.swift */,
 				AA97011226283F1500EA47BF /* MainView.swift */,
+				AA86DEEC262996F400D9BECC /* SettingsView.swift */,
 				AA97011426283F1700EA47BF /* Assets.xcassets */,
 				AA97011926283F1700EA47BF /* Info.plist */,
 				AA97011626283F1700EA47BF /* Preview Content */,
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA86DEED262996F400D9BECC /* SettingsView.swift in Sources */,
 				AA970158262882A600EA47BF /* ViewModel.swift in Sources */,
 				AA97011326283F1500EA47BF /* MainView.swift in Sources */,
 				AA97011126283F1500EA47BF /* Fitch_CheneyApp.swift in Sources */,

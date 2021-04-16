@@ -29,6 +29,7 @@ class ViewModel: ObservableObject {
     
     func reset() {
         model.reset()
+        selectedSuit = nil
     }
     
     func color() -> Color {

@@ -40,6 +40,9 @@ struct Number: View {
                 }
                 Spacer()
             }
+            .onShake {
+                viewModel.reset()
+            }
         }
         .padding()
     }
