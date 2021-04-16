@@ -52,37 +52,19 @@ struct Suit: View {
             Text("Card \(viewModel.numberOfCards + 1)")
                 .font(viewModel.font)
                 .padding(.bottom, 50)
-            HStack {
-                Image("diamonds")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(20)
-                    .onTapGesture {
-                        viewModel.setSuit(.diamonds)
+            let suitMatrix: [[Model.Suit]] = [[.diamonds, .hearts], [.spades, .clubs]]
+            ForEach(suitMatrix, id: \.self) { row in
+                HStack {
+                    ForEach(row, id: \.self) { s in
+                        Image(s.name)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(20)
+                            .onTapGesture {
+                                viewModel.setSuit(s)
+                            }
                     }
-                Image("hearts")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(20)
-                    .onTapGesture {
-                        viewModel.setSuit(.hearts)
-                    }
-            }
-            HStack {
-                Image("spades")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(20)
-                    .onTapGesture {
-                        viewModel.setSuit(.spades)
-                    }
-                Image("clubs")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(20)
-                    .onTapGesture {
-                        viewModel.setSuit(.clubs)
-                    }
+                }
             }
         }
         .padding()
