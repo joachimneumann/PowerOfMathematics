@@ -15,195 +15,83 @@ struct Number: View {
             VStack {
                 Spacer()
                 HStack {
-                    VStack {
-                        Text("2")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .opacity(viewModel.hasBeenSelected(.N2) ? 0 : 1)
-                    .onTapGesture {
-                        viewModel.setNumber(.N2)
-                    }
-                    VStack {
-                        Text("3")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .opacity(viewModel.hasBeenSelected(.N3) ? 0 : 1)
-                    .onTapGesture {
-                        viewModel.setNumber(.N3)
-                    }
-                    VStack {
-                        Text("4")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N4)
-                    }
-                    VStack {
-                        Text("5")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N5)
+                    let numbers: [Model.Number] = [.N2, .N3, .N4, .N5]
+                    ForEach(numbers, id: \.self) { n in
+                        VStack {
+                            Text(n.shortName)
+                                .foregroundColor(viewModel.color())
+                                .font(viewModel.font)
+                                .padding(.bottom, viewModel.bottomPaddingNumbers)
+                                .zIndex(1)
+                            Image(viewModel.currentSuitName())
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: geometry.size.width * w)
+                        }
+                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
+                        .onTapGesture {
+                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
+                        }
                     }
                 }
                 HStack {
-                    VStack {
-                        Text("6")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N6)
-                    }
-                    VStack {
-                        Text("7")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N7)
-                    }
-                    VStack {
-                        Text("8")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N8)
-                    }
-                    VStack {
-                        Text("9")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N9)
+                    let numbers: [Model.Number] = [.N6, .N7, .N8, .N9]
+                    ForEach(numbers, id: \.self) { n in
+                        VStack {
+                            Text(n.shortName)
+                                .foregroundColor(viewModel.color())
+                                .font(viewModel.font)
+                                .padding(.bottom, viewModel.bottomPaddingNumbers)
+                                .zIndex(1)
+                            Image(viewModel.currentSuitName())
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: geometry.size.width * w)
+                        }
+                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
+                        .onTapGesture {
+                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
+                        }
                     }
                 }
                 HStack {
-                    VStack {
-                        Text("10")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.N10)
-                    }
-                    VStack {
-                        Text("J")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.NJ)
-                    }
-                    VStack {
-                        Text("Q")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.NQ)
-                    }
-                    VStack {
-                        Text("K")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.NK)
+                    let numbers: [Model.Number] = [.N10, .NJ, .NQ, .NK]
+                    ForEach(numbers, id: \.self) { n in
+                        VStack {
+                            Text(n.shortName)
+                                .foregroundColor(viewModel.color())
+                                .font(viewModel.font)
+                                .padding(.bottom, viewModel.bottomPaddingNumbers)
+                                .zIndex(1)
+                            Image(viewModel.currentSuitName())
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: geometry.size.width * w)
+                        }
+                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
+                        .onTapGesture {
+                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
+                        }
                     }
                 }
                 HStack {
-                    VStack {
-                        Text("A")
-                            .foregroundColor(viewModel.color())
-                            .font(viewModel.font)
-                            .padding(.bottom, viewModel.bottomPaddingNumbers)
-                            .zIndex(1)
-                        Image(viewModel.currentSuitName())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width * w)
-                    }
-                    .onTapGesture {
-                        viewModel.setNumber(.NA)
+                    let numbers: [Model.Number] = [.NA]
+                    ForEach(numbers, id: \.self) { n in
+                        VStack {
+                            Text(n.shortName)
+                                .foregroundColor(viewModel.color())
+                                .font(viewModel.font)
+                                .padding(.bottom, viewModel.bottomPaddingNumbers)
+                                .zIndex(1)
+                            Image(viewModel.currentSuitName())
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: geometry.size.width * w)
+                        }
+                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
+                        .onTapGesture {
+                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
+                        }
                     }
                 }
                 Spacer()
