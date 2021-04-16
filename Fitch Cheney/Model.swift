@@ -215,76 +215,38 @@ struct Model {
     }
     
     mutating func calc() {
-        let suit = cards[0].suit
-        let startNumber = cards[0].number
-//        1 = LMH 012 1<2, 1<3, 2<3
-//        2 = LHM 021 1<2, 1<3, 2>3
-//        3 = MLH 102 1>2, 1<3, 2<3
-//        4 = MHL 120 1<2, 1>3, 2>3
-//        5 = HLM 201 1>2, 1>3, 2<3
-//        6 = HML 210 1>2, 1>3, 2>3
         var index = -100
-        if cards[1].lt(cards[2]) {
-            // 1 < 2
-            if cards[1].lt(cards[3]) {
-                // 1 < 3
-                // Lxx
-                if cards[2].lt(cards[3]) {
-                    // 2 < 3
-                    // LMH
-                    index = 1
-                } else {
-                    // 2 > 3
-                    // LHM
-                    index = 2
-                }
+        if cards[1].lt(cards[2]) && cards[1].lt(cards[3]) {
+            // position 1: Lowest
+            if cards[2].lt(cards[3]) {
+                index = 1
             } else {
-                // 1 > 3
-                // Mxx
-                if cards[2].lt(cards[3]) {
-                    // 2 < 3
-                    // impossible
-                } else {
-                    // 2 > 3
-                    // MHL
-                    index = 4
-                }
+                index = 2
+            }
+        } else if cards[1].gt(cards[2]) && cards[1].gt(cards[3]) {
+            // position 1: largest
+            if cards[2].lt(cards[3]) {
+                index = 5
+            } else {
+                index = 6
             }
         } else {
-            // 1 > 2
-            if cards[1].lt(cards[3]) {
-                // 1 < 3
-                // Mxx
-                if cards[2].lt(cards[3]) {
-                    // 2 < 3
-                    // MLH
-                    index = 3
-                } else {
-                    // 2 > 3
-                    // impossible
-                }
+            // position 1: middle
+            if cards[2].lt(cards[3]) {
+                index = 3
             } else {
-                // 1 > 3
-                // Hxx
-                if cards[2].lt(cards[3]) {
-                    // 2 < 3
-                    // HLM
-                    index = 5
-                } else {
-                    // 2 > 3
-                    // HML
-                    index = 6
-                }
+                index = 4
             }
         }
-        var newIndex = startNumber.value + index
+
+        var newIndex = cards[0].number.value + index
         if newIndex > 14 {
             newIndex = newIndex - 13
         }
         let endNumber = number(value: newIndex)
-        
-        solution = "\(endNumber.name)_of_\(suit.name)"
+        solution = "\(endNumber.name)_of_\(cards[0].suit.name)"
     }
+
     
     var solution: String? = nil
     var cards: [Card] = []
