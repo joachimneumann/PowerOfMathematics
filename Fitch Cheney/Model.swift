@@ -74,6 +74,38 @@ struct Model {
                 return "ace"
             }
         }
+        var shortName: String {
+            switch self {
+            case .none:
+                return "none"
+            case .N2:
+                return "2"
+            case .N3:
+                return "3"
+            case .N4:
+                return "4"
+            case .N5:
+                return "5"
+            case .N6:
+                return "6"
+            case .N7:
+                return "7"
+            case .N8:
+                return "8"
+            case .N9:
+                return "9"
+            case .N10:
+                return "10"
+            case .NJ:
+                return "J"
+            case .NQ:
+                return "Q"
+            case .NK:
+                return "K"
+            case .NA:
+                return "A"
+            }
+        }
         var value: Int {
             switch self {
             case .none:
@@ -175,6 +207,10 @@ struct Model {
 
         var value: Int {
             suit.value + number.value
+        }
+        
+        static func ==(lhs: Card, rhs: Card) -> Bool {
+            return lhs.suit == rhs.suit && lhs.number == rhs.number
         }
     }
     

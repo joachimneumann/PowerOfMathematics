@@ -14,6 +14,14 @@ class ViewModel: ObservableObject {
         return model.currentCard.suit.name
     }
 
+    func hasBeenSelected(_ c: Model.Number) -> Bool {
+        let card = Model.Card(suit: currentSuit(), number: c)
+        for selected in model.cards {
+            if card == selected { return true }
+        }
+        return false
+    }
+    
     func currentSuit() -> Model.Suit {
         return model.currentCard.suit
     }
