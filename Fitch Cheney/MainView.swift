@@ -15,83 +15,26 @@ struct Number: View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
-                HStack {
-                    let numbers: [Model.Number] = [.N2, .N3, .N4, .N5]
-                    ForEach(numbers, id: \.self) { n in
-                        VStack {
-                            Text(n.shortName)
-                                .foregroundColor(viewModel.color())
-                                .font(viewModel.font)
-                                .padding(.bottom, viewModel.bottomPaddingNumbers)
-                                .zIndex(1)
-                            Image(numberSuit.name)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: geometry.size.width * w)
-                        }
-                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
-                        .onTapGesture {
-                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
-                        }
-                    }
-                }
-                HStack {
-                    let numbers: [Model.Number] = [.N6, .N7, .N8, .N9]
-                    ForEach(numbers, id: \.self) { n in
-                        VStack {
-                            Text(n.shortName)
-                                .foregroundColor(viewModel.color())
-                                .font(viewModel.font)
-                                .padding(.bottom, viewModel.bottomPaddingNumbers)
-                                .zIndex(1)
-                            Image(numberSuit.name)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: geometry.size.width * w)
-                        }
-                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
-                        .onTapGesture {
-                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
-                        }
-                    }
-                }
-                HStack {
-                    let numbers: [Model.Number] = [.N10, .NJ, .NQ, .NK]
-                    ForEach(numbers, id: \.self) { n in
-                        VStack {
-                            Text(n.shortName)
-                                .foregroundColor(viewModel.color())
-                                .font(viewModel.font)
-                                .padding(.bottom, viewModel.bottomPaddingNumbers)
-                                .zIndex(1)
-                            Image(numberSuit.name)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: geometry.size.width * w)
-                        }
-                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
-                        .onTapGesture {
-                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
-                        }
-                    }
-                }
-                HStack {
-                    let numbers: [Model.Number] = [.NA]
-                    ForEach(numbers, id: \.self) { n in
-                        VStack {
-                            Text(n.shortName)
-                                .foregroundColor(viewModel.color())
-                                .font(viewModel.font)
-                                .padding(.bottom, viewModel.bottomPaddingNumbers)
-                                .zIndex(1)
-                            Image(numberSuit.name)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: geometry.size.width * w)
-                        }
-                        .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
-                        .onTapGesture {
-                            if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
+
+                let numberMatrix: [[Model.Number]] = [[.N2, .N3, .N4, .N5], [.N6, .N7, .N8, .N9], [.N10, .NJ, .NQ, .NK], [.NA]]
+                ForEach(numberMatrix, id: \.self) { row in
+                    HStack {
+                        ForEach(row, id: \.self) { n in
+                            VStack {
+                                Text(n.shortName)
+                                    .foregroundColor(viewModel.color())
+                                    .font(viewModel.font)
+                                    .padding(.bottom, viewModel.bottomPaddingNumbers)
+                                    .zIndex(1)
+                                Image(numberSuit.name)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: geometry.size.width * w)
+                            }
+                            .opacity(viewModel.hasBeenSelected(n) ? 0.2 : 1)
+                            .onTapGesture {
+                                if !viewModel.hasBeenSelected(n) { viewModel.setNumber(n) }
+                            }
                         }
                     }
                 }
