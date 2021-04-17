@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ViewModel: ObservableObject {
-    @Published var model: Model
+    private var model: Model
     @Published var selectedSuit: Model.Suit?
 
     func hasBeenSelected(_ c: Model.Number) -> Bool {
@@ -27,9 +27,26 @@ class ViewModel: ObservableObject {
         model.cards.count
     }
     
-    func reset() {
+    @objc func reset() {
         model.reset()
-        selectedSuit = nil
+    }
+
+    var localisedCard: String {
+        let language = UserDefaults.standard.string(forKey: "Language")
+        switch language {
+        case "English":
+            return "Card"
+        case "German":
+            return "Karte"
+        case "Vietnamese":
+            return "chơi bài"
+        case "Spanish":
+            return "Carta"
+        case "Danish":
+            return "Spillekort"
+        default:
+            return "Card"
+        }
     }
     
     func color() -> Color {
@@ -72,6 +89,9 @@ class ViewModel: ObservableObject {
 
     init() {
         model = Model()
+//        UserDefaults.standard.register(defaults: [String:Any]())
+//        NotificationCenter.default.addObserver(self,selector: #selector(reset),name: UserDefaults.didChangeNotification,object: nil)
+
 //        model.solution = "4_of_hearts"
     }
 }

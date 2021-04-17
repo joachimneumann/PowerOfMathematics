@@ -52,7 +52,7 @@ struct Suit: View {
     @State var viewModel: ViewModel
     var body: some View {
         VStack {
-            Text("Card \(viewModel.numberOfCards + 1)")
+            Text("\(viewModel.localisedCard) \(viewModel.numberOfCards + 1)")
                 .font(viewModel.font)
                 .padding(.bottom, 50)
             let suitMatrix: [[Model.Suit]] = [[.diamonds, .hearts], [.spades, .clubs]]

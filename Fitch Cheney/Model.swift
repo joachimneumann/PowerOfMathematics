@@ -37,13 +37,13 @@ struct Model {
         var value: Int {
             switch self {
             case .diamonds:
-                return 100
+                return 1
             case .hearts:
-                return 200
+                return 2
             case .spades:
-                return 300
+                return 3
             case .clubs:
-                return 400
+                return 4
             }
         }
     }
@@ -113,62 +113,62 @@ struct Model {
         var value: Int {
             switch self {
             case .N2:
-                return 2
+                return 20
             case .N3:
-                return 3
+                return 30
             case .N4:
-                return 4
+                return 40
             case .N5:
-                return 5
+                return 50
             case .N6:
-                return 6
+                return 60
             case .N7:
-                return 7
+                return 70
             case .N8:
-                return 8
+                return 80
             case .N9:
-                return 9
+                return 90
             case .N10:
-                return 10
+                return 100
             case .NJ:
-                return 11
+                return 110
             case .NQ:
-                return 12
+                return 120
             case .NK:
-                return 13
+                return 130
             case .NA:
-                return 14
+                return 140
             }
         }
     }
 
     func number(value: Int) -> Number {
         switch value {
-            case 2:
+            case 20:
                 return .N2
-            case 3:
+            case 30:
                 return .N3
-            case 4:
+            case 40:
                 return .N4
-            case 5:
+            case 50:
                 return .N5
-            case 6:
+            case 60:
                 return .N6
-            case 7:
+            case 70:
                 return .N7
-            case 8:
+            case 80:
                 return .N8
-            case 9:
+            case 90:
                 return .N9
-            case 10:
+            case 100:
                 return .N10
-            case 11:
+            case 110:
                 return .NJ
-            case 12:
+            case 120:
                 return .NQ
-            case 13:
+            case 130:
                 return .NK
-            case 14:
+            case 140:
                 return .NA
             default:
                 return .NA
@@ -207,29 +207,29 @@ struct Model {
         if cards[1].lt(cards[2]) && cards[1].lt(cards[3]) {
             // position 1: Lowest
             if cards[2].lt(cards[3]) {
-                index = 1
+                index = 10
             } else {
-                index = 2
+                index = 20
             }
         } else if cards[1].gt(cards[2]) && cards[1].gt(cards[3]) {
             // position 1: largest
             if cards[2].lt(cards[3]) {
-                index = 5
+                index = 50
             } else {
-                index = 6
+                index = 60
             }
         } else {
             // position 1: middle
             if cards[2].lt(cards[3]) {
-                index = 3
+                index = 30
             } else {
-                index = 4
+                index = 40
             }
         }
 
         var newIndex = cards[0].number.value + index
-        if newIndex > 14 {
-            newIndex = newIndex - 13
+        if newIndex > 140 {
+            newIndex = newIndex - 130
         }
         let endNumber = number(value: newIndex)
         solution = "\(endNumber.name)_of_\(cards[0].suit.name)"
