@@ -222,7 +222,7 @@ struct Model {
             pos2 = 1
             pos3 = 3
         case 4:
-            posKey = 4
+            posKey = 3
             pos1 = 0
             pos2 = 1
             pos3 = 2

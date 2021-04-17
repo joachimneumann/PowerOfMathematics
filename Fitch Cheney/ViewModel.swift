@@ -21,6 +21,14 @@ class ViewModel: ObservableObject {
         return false
     }
     
+    func suitKeyName(_ s: Model.Suit) -> String {
+        if s == .diamonds { if UserDefaults.standard.integer(forKey: "KeyCardPosition") == 1 { return "\(s.name)Key"} }
+        if s == .hearts   { if UserDefaults.standard.integer(forKey: "KeyCardPosition") == 2 { return "\(s.name)Key"} }
+        if s == .spades   { if UserDefaults.standard.integer(forKey: "KeyCardPosition") == 3 { return "\(s.name)Key"} }
+        if s == .clubs    { if UserDefaults.standard.integer(forKey: "KeyCardPosition") == 4 { return "\(s.name)Key"} }
+        return s.name
+    }
+    
     var solution: String? {
         model.solution
     }

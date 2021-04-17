@@ -58,7 +58,7 @@ struct Suit: View {
             ForEach(suitMatrix, id: \.self) { row in
                 HStack {
                     ForEach(row, id: \.self) { s in
-                        Image(s.name)
+                        Image(viewModel.suitKeyName(s))
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(20)
