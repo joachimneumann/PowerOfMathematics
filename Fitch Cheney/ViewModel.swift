@@ -9,15 +9,11 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published var model: Model
+    @Published var selectedNumber: Model.Number?
     @Published var selectedSuit: Model.Suit?
+    @Published var whiteScreen: Bool = false
 
     func hasBeenSelected(_ c: Model.Number) -> Bool {
-        if (selectedSuit == nil) {return false}
-        
-        let card = Model.Card(suit: selectedSuit!, number: c)
-        for selected in model.cards {
-            if card == selected { return true }
-        }
         return false
     }
     
@@ -38,8 +34,12 @@ class ViewModel: ObservableObject {
     }
     
     @objc func reset() {
-        withAnimation() {
+        self.whiteScreen = true
+        withAnimation(.easeIn(duration: 2.0)) {
+            self.whiteScreen = false
             model.reset()
+            selectedNumber = nil
+            selectedSuit = nil
         }
     }
 
@@ -60,36 +60,46 @@ class ViewModel: ObservableObject {
             return "Card"
         }
     }
-    
-    func color() -> Color {
-        if (selectedSuit == nil) {return Color.black}
 
-        switch selectedSuit!.color {
-        case "black":
-            return Color.black
-        case "red":
-            return Color(UIColor(red: 205/255, green: 43/255, blue: 29/255, alpha: 1))
-        default:
-            return Color.black
+    func selectNumber(_ new: Model.Number) {
+        selectedNumber = new
+        cardSelected()
+    }
+
+    private func cardSelected() {
+        if self.selectedSuit != nil && self.selectedNumber != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.whiteScreen = true
+                withAnimation(.easeIn(duration: 1.0)) {
+                    self.whiteScreen = false
+                    self.model.cards.append(Model.Card(suit: self.selectedSuit!, number: self.selectedNumber!))
+                    self.selectedNumber = nil
+                    self.selectedSuit = nil
+                    if self.model.cards.count == 4 {
+                        let keyCardPosition = UserDefaults.standard.integer(forKey: "KeyCardPosition")
+                        self.model.calc(keyCardPosition: keyCardPosition)
+                    }
+                }
+            }
         }
     }
-    
-    func setSuit(_ new: Model.Suit) {
+
+    func selectSuit(_ new: Model.Suit) {
         selectedSuit = new
-    }
-
-    func setNumber(_ new: Model.Number) {
-        model.cards.append(Model.Card(suit: selectedSuit!, number: new))
-        selectedSuit = nil
-        if model.cards.count == 4 {
-            let keyCardPosition = UserDefaults.standard.integer(forKey: "KeyCardPosition")
-            model.calc(keyCardPosition: keyCardPosition)
-        }
+        cardSelected()
     }
 
     var bottomPaddingNumbers: CGFloat {
         get {
             -15.0
+        }
+    }
+    
+    func removeCard() {
+        self.whiteScreen = true
+        withAnimation(.easeIn(duration: 1.0)) {
+            self.whiteScreen = false
+            model.cards.removeLast()
         }
     }
     
@@ -104,6 +114,7 @@ class ViewModel: ObservableObject {
 
     init() {
         model = Model()
+        reset()
         UserDefaults.standard.register(defaults: [String:Any]())
         NotificationCenter.default.addObserver(self,selector: #selector(reset),name: UserDefaults.didChangeNotification,object: nil)
     }
