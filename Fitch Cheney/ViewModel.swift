@@ -8,10 +8,12 @@
 import SwiftUI
 
 class ViewModel: ObservableObject {
-    private var model: Model
+    @Published var model: Model
     @Published var selectedSuit: Model.Suit?
 
     func hasBeenSelected(_ c: Model.Number) -> Bool {
+        if (selectedSuit == nil) {return false}
+        
         let card = Model.Card(suit: selectedSuit!, number: c)
         for selected in model.cards {
             if card == selected { return true }
@@ -28,7 +30,9 @@ class ViewModel: ObservableObject {
     }
     
     @objc func reset() {
-        model.reset()
+        withAnimation() {
+            model.reset()
+        }
     }
 
     var localisedCard: String {
@@ -50,6 +54,8 @@ class ViewModel: ObservableObject {
     }
     
     func color() -> Color {
+        if (selectedSuit == nil) {return Color.black}
+
         switch selectedSuit!.color {
         case "black":
             return Color.black
@@ -68,7 +74,8 @@ class ViewModel: ObservableObject {
         model.cards.append(Model.Card(suit: selectedSuit!, number: new))
         selectedSuit = nil
         if model.cards.count == 4 {
-            model.calc()
+            let keyCardPosition = UserDefaults.standard.integer(forKey: "KeyCardPosition")
+            model.calc(keyCardPosition: keyCardPosition)
         }
     }
 
@@ -89,9 +96,7 @@ class ViewModel: ObservableObject {
 
     init() {
         model = Model()
-//        UserDefaults.standard.register(defaults: [String:Any]())
-//        NotificationCenter.default.addObserver(self,selector: #selector(reset),name: UserDefaults.didChangeNotification,object: nil)
-
-//        model.solution = "4_of_hearts"
+        UserDefaults.standard.register(defaults: [String:Any]())
+        NotificationCenter.default.addObserver(self,selector: #selector(reset),name: UserDefaults.didChangeNotification,object: nil)
     }
 }

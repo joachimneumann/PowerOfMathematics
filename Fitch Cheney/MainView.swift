@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct Number: View {
-    @State var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     let numberSuit: Model.Suit
     let w: CGFloat = 0.23
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
-
                 let numberMatrix: [[Model.Number]] = [[.N2, .N3, .N4, .N5], [.N6, .N7, .N8, .N9], [.N10, .NJ, .NQ, .NK], [.NA]]
                 ForEach(numberMatrix, id: \.self) { row in
                     HStack {
@@ -49,7 +48,7 @@ struct Number: View {
 }
 
 struct Suit: View {
-    @State var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     var body: some View {
         VStack {
             Text("\(viewModel.localisedCard) \(viewModel.numberOfCards + 1)")
@@ -75,12 +74,12 @@ struct Suit: View {
 }
 
 struct Solution: View {
-    @State var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     @State var flipped = false
     @State var turn90 = false
     let duration90 = 0.3
     var body: some View {
-        Image(self.flipped ? viewModel.solution! : "back")
+        Image((viewModel.solution != nil && self.flipped) ? viewModel.solution! : "back")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .padding()

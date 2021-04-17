@@ -202,37 +202,61 @@ struct Model {
         }
     }
     
-    mutating func calc() {
+    mutating func calc(keyCardPosition: Int) {
         var index = -100
-        if cards[1].lt(cards[2]) && cards[1].lt(cards[3]) {
+        var posKey = 0
+        var pos1 = 1
+        var pos2 = 2
+        var pos3 = 3
+        switch keyCardPosition {
+        case 1:
+            break
+        case 2:
+            posKey = 1
+            pos1 = 0
+            pos2 = 2
+            pos3 = 3
+        case 3:
+            posKey = 2
+            pos1 = 0
+            pos2 = 1
+            pos3 = 3
+        case 4:
+            posKey = 4
+            pos1 = 0
+            pos2 = 1
+            pos3 = 2
+        default: break
+        }
+        if cards[pos1].lt(cards[pos2]) && cards[pos1].lt(cards[pos3]) {
             // position 1: Lowest
-            if cards[2].lt(cards[3]) {
+            if cards[pos2].lt(cards[pos3]) {
                 index = 10
             } else {
                 index = 20
             }
-        } else if cards[1].gt(cards[2]) && cards[1].gt(cards[3]) {
+        } else if cards[pos1].gt(cards[pos2]) && cards[pos1].gt(cards[pos3]) {
             // position 1: largest
-            if cards[2].lt(cards[3]) {
+            if cards[pos2].lt(cards[pos3]) {
                 index = 50
             } else {
                 index = 60
             }
         } else {
             // position 1: middle
-            if cards[2].lt(cards[3]) {
+            if cards[pos2].lt(cards[pos3]) {
                 index = 30
             } else {
                 index = 40
             }
         }
 
-        var newIndex = cards[0].number.value + index
+        var newIndex = cards[posKey].number.value + index
         if newIndex > 140 {
             newIndex = newIndex - 130
         }
         let endNumber = number(value: newIndex)
-        solution = "\(endNumber.name)_of_\(cards[0].suit.name)"
+        solution = "\(endNumber.name)_of_\(cards[posKey].suit.name)"
     }
 
     
